@@ -6,20 +6,21 @@ using namespace std;
 class Solution
 {
 	public:
-	//Function to find the shortest distance of all the vertices
-    //from the source vertex S.
+	
     vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
     {
-        // <dis,node>
-        set<pair<int,int>> st;
-        vector<int> dist(V,1e9);
+        vector<int> distance(V,1e9);
         
+        //Set of dis,Node
+        set<pair<int,int>> st;
         st.insert(make_pair(0,S));
-        dist[S]=0;
+        
+        distance[S]=0;
         
         while(!st.empty())
         {
             auto it=*(st.begin());
+            
             int node=it.second;
             int dis=it.first;
             
@@ -27,22 +28,18 @@ class Solution
             
             for(auto x:adj[node])
             {
-                int currNode=x[0];
+                int newNode=x[0];
                 int edgeW=x[1];
                 
-                if(dis+edgeW<dist[currNode])
+                if(dis+edgeW<distance[newNode])
                 {
-                    if(dist[currNode]!=1e9)
-                    {
-                        st.erase(make_pair(dist[currNode],currNode));
-                        dist[currNode]=currNode+edgeW;
-                    }
-                    dist[currNode]=dis+edgeW;
-                    st.insert(make_pair(dist[currNode],currNode));
+                    distance[newNode]=dis+edgeW;
+                    st.insert(make_pair(distance[newNode],newNode));
                 }
             }
         }
-                    return dist;
+        return distance;
+        
     }
 };
 
