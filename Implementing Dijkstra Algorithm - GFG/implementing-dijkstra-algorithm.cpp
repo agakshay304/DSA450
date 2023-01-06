@@ -33,6 +33,10 @@ class Solution
                 
                 if(dis+edgeW<distance[newNode])
                 {
+                    if(distance[newNode]!=1e9)
+                {
+                    st.erase(make_pair(distance[newNode],newNode));
+                }
                     distance[newNode]=dis+edgeW;
                     st.insert(make_pair(distance[newNode],newNode));
                 }
