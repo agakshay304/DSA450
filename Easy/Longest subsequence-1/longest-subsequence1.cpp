@@ -8,33 +8,28 @@ using namespace std;
 // User function Template for C++
 
 class Solution{
-
 public:
-
-    int f(int n,int arr[],int i,int p){
-
-        if(i==n) return 0;
-
-        int nt=f(n,arr,i+1,p);
-
-        int t=0;
-
-        if((arr[p]-arr[i])==1 || p==-1 ||(arr[p]-arr[i])==-1) t=1+f(n,arr,i+1,i);
-
-        return max(t,nt);
-
-    }
-
-    int longestSubsequence(int n, int arr[])
-
+    int longestSubsequence(int n, int A[])
     {
-
-        // code here
-
-        return f(n,arr,0,-1);
-
+        //Approach:
+        //1. Same as LIS
+        //2.Instead of increasing seq we will check abs(arr[i]-arr[j])==1
+        
+        vector<int> dp(n,1);
+        int ans=0;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<i;j++)
+            {
+                if(abs(A[i]-A[j])==1)
+                {
+                    dp[i]=max(dp[i],1+dp[j]);
+                }
+            }
+            ans=max(ans,dp[i]);
+        }
+        return ans;
     }
-
 };
 
 //{ Driver Code Starts.
