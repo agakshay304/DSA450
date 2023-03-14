@@ -8,7 +8,6 @@ using namespace std;
 class Solution{
     public:
         int dpSolve(vector<int> &a, int i, int j, vector<vector<int>> &dp, int l, int h){
-            // l = lower boundary ballon value h = higher boundary balllon value
             if(i > j)
                 return 0;
             if(dp[i][j] != -1)
